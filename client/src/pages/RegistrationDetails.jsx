@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import Swal from "sweetalert2";
 const drinkingOptions = ["Non-drinker", "Social drinker", "Regular drinker"];
 const dietOptions = ["Veg", "Non-Veg", ];
 const cleanlinessOptions = ["Neat", "Moderate", "Relaxed"];
@@ -25,7 +25,11 @@ export default function ExtraDetails() {
 
   const handleSubmit = async () => {
     if (!formData.smoking || !formData.drinking || !working || !diet || !sleep || !cleanliness || !guests || !role) {
-      alert("Please fill all fields");
+      Swal.fire({
+  title: "All Fields are Required ❌",
+  text: "Please fill in all preferences to complete registration.",
+  
+});
       return;
     }
 
@@ -48,15 +52,27 @@ export default function ExtraDetails() {
       });
 
       const data = await res.json();
-      if (data.success) { 
+      if (res.status === 201 || res.status === 200) { 
         navigate("/Login");
-        alert("Registration successful!");
+      Swal.fire({
+  title: "Account Created 🎉",
+  text: "You can now login",
+  icon: "success"
+});
        
       } else {
-        alert(data.message || "Something went wrong");
+       Swal.fire({
+  title: `Registration Failed ❌`,
+  text: data.message || "Please try again",
+  icon: "error"
+});
       }
     } catch (err) {
-      alert("Server error, try again");
+      Swal.fire({
+  title: "Server Error ❌",
+  text: "Unable to register at the moment. Please try again later.",
+  icon: "error"
+});
     }
   };
 

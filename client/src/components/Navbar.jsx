@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // auth state
+  const [isLoggedIn, setIsLoggedIn] = useState(); // auth state
   const [menuOpen, setMenuOpen] = useState(false); // mobile menu toggle
 
   return (
@@ -35,28 +35,19 @@ const Navbar = () => {
               List Your PG
             </Link>
 
-            {isLoggedIn ? (
-              <>
-                <Link to="/profile" className="font-medium text-blue-900 hover:underline">
+            
+                <Link to="/profile" className="font-medium text-blue-900 me-3 hover:underline">
                   Profile
                 </Link>
                 <button
                   onClick={() => setIsLoggedIn(false)}
-                  className="font-medium text-white bg-red-500 px-4 py-2 rounded-lg"
+                  className="font-medium text-white bg-blue-500 px-5 py-2 rounded-lg"
                 >
                   Logout
                 </button>
-              </>
-            ) : (
-              <>
-                <Link to="/login" className="font-medium text-blue-900 hover:underline me-5">
-                  Login
-                </Link>
-                <Link to="/register" className="font-medium text-white bg-blue-600 px-4 py-2 rounded-lg">
-                  Register
-                </Link>
-              </>
-            )}
+              
+              
+            
           </div>
         </div>
 
@@ -83,12 +74,12 @@ const Navbar = () => {
 
           {isLoggedIn ? (
             <>
-              <Link to="/profile" className="font-medium text-blue-900 hover:underline">
+              <Link to="/profile" className="font-medium text-blue-900  hover:underline">
                 Profile
               </Link>
               <button
                 onClick={() => setIsLoggedIn(false)}
-                className="font-medium text-white bg-red-500 px-4 py-2 rounded-lg"
+                className="font-medium text-white bg-blue-500 py-2 rounded-lg"
               >
                 Logout
               </button>

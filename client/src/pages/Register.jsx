@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import Swal from "sweetalert2";
 const Register = () => {
   const [step,setStep]=useState(1);
   const [role,setRole]=useState("tenant");
@@ -35,6 +35,11 @@ const NavigateOTPpage=async()=>{
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email }),
+  });
+  Swal.fire({
+    title: "OTP sent Successfully 🎉",
+    text: `An OTP has been sent to ${email}. Please check your inbox and verify.`,
+    icon: "Success",
   });
   navigate('/VerifyOtpEmail',{
     state: {formData} 
