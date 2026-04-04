@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import Swal from "sweetalert2";
 const VerifyOTP = () => {
   const navigate=useNavigate();
   const loaction=useLocation()
@@ -22,7 +22,11 @@ const {email,name,phone,password,role}=loaction.state?.formData || {};
 
   const CheckOTP = async () => {
   if (otp === "" || otp.length !== 6) {
-    alert("Please enter a valid 6-digit OTP");
+     Swal.fire({
+           title: "Please enter a valid 6-digit OTP ❌",
+           icon: "error",
+           
+         });
     return;
   }
  
@@ -37,12 +41,22 @@ const {email,name,phone,password,role}=loaction.state?.formData || {};
 
     const data = await res.json();
     if (res.ok) {
-      alert(data.message);
+
+     Swal.fire({
+           title: "OTP Verified Successful 🎉",
+           icon: "success",
+           timer: 1500,
+           showConfirmButton: false
+         });
     navigate('/RegistrationDetails',{
       state: { name, email, phone, password ,role }}
     );
     } else {
-      alert(data.message || "OTP verification failed");
+       Swal.fire({
+           title: "Invalid OTP ❌",
+           icon: "error"
+           
+         });
     }
 
   } catch (err) {

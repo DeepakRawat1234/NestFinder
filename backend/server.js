@@ -3,12 +3,16 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
+import listingRoutes from "./routes/listingRoutes.js";
+import propertyRoutes from "./routes/propertyRoutes.js";
 const app=express();
 dotenv.config();
 app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth",authRoutes);
+app.use("/api/Listing",listingRoutes)
+app.use("/api/properties",propertyRoutes);
 app.get("/",(req,res)=>{
 res.send("Welcome to NestFinder API");
 })

@@ -1,6 +1,7 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-
+import "react-toastify/dist/ReactToastify.css";
 export default function Login() {
   const navigate = useNavigate();
   const [role, setRole] = useState("Tenant");
@@ -20,14 +21,30 @@ export default function Login() {
         body: JSON.stringify({ ...formData, role }),
       });
       const data = await res.json();
+      
       if (res.ok) {
-        alert(data.message);
-        navigate("/dashboard");
+        localStorage.setItem("token", data.token);
+        Swal.fire({
+      title: "Login Successful 🎉",
+      text: "Welcome back to NestFinder!",
+      icon: "success",
+      timer: 1500,
+      showConfirmButton: false
+    });
+        navigate("/home");
       } else {
-        alert(data.message || "Login failed");
+        Swal.fire({
+  title: "Error ❌",
+  text: "Login failed. Please check your credentials and try again.",
+  icon: "error"
+});
       }
     } catch (err) {
-      alert("Server error, try again");
+      Swal.fire({
+  title: "Error ❌",
+  text: "Server error. Please try again later.",
+  icon: "error"
+});
     }
   };
 
