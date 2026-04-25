@@ -46,6 +46,7 @@ export const Login = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const role = req.body.role;
+
     try {
         const match = await User.findOne({ email });
         if (!match) {
