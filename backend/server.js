@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import listingRoutes from "./routes/listingRoutes.js";
 import propertyRoutes from "./routes/propertyRoutes.js";
+import complaintRoutes from "./routes/complaintRoutes.js";
 const app=express();
 dotenv.config();
 app.use(cors());
@@ -13,6 +14,8 @@ app.use(express.json());
 app.use("/api/auth",authRoutes);
 app.use("/api/Listing",listingRoutes)
 app.use("/api/properties",propertyRoutes);
+app.use("/api/complaints",complaintRoutes);
+
 app.get("/",(req,res)=>{
 res.send("Welcome to NestFinder API");
 })

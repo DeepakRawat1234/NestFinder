@@ -11,12 +11,20 @@ import Login from './pages/Login.jsx'
 import Footer from './components/Footer.jsx'
 import Landing from './pages/Landing.jsx'
 import PropertiesDetails from './pages/PropertiesDetails.jsx'
+import { ShowProperty } from './components/ShowProperty.jsx'
+import PaymentPage from './pages/PaymentPage.jsx'
+import PaymentQR from './pages/PaymentQR.jsx'
+import Profile from './pages/tenant/Profile.jsx'
+import MyProperty from './pages/tenant/Booking.jsx'
+import MyBookings from './pages/tenant/Booking.jsx'
+import ComplaintsPage from './pages/tenant/Complaint.jsx'
+
 
 function App() {
   
   return (
     <>
-   
+  
       
     <Routes>
       <Route path='/' element={<Landing />} />
@@ -26,6 +34,12 @@ function App() {
     <Route path='/RegistrationDetails' element={<Step2Form/>}/>
     <Route path='/Login' element={<Login/>}/>
     <Route path='/properties' element={< PropertiesDetails/>} />
+    <Route path='/property/:id' element={<ShowProperty/>}></Route>
+    <Route path='/payment' element={<PaymentPage/>}></Route>
+    <Route path='/paymentQR' element={<PaymentQR/>}></Route>
+    <Route path='/profile' element={<Profile/>}></Route>
+    <Route path="/mybookings" element={<MyBookings/>}></Route>
+    <Route path='/complaints' element={<ComplaintsPage/>}/>
     </Routes>
     
 

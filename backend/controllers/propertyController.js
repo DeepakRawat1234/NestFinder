@@ -1,4 +1,7 @@
+import mongoose from "mongoose";
+import  {Booking}  from "../models/Booking.js";
 import Properties from "../models/Properties.js";
+import User from "../models/User.js";
 export const getAllProperties = async (req, res) => {
   const { rent, city, type, gender, roomType } = req.query || {};
   let filter = {};
@@ -6,7 +9,7 @@ export const getAllProperties = async (req, res) => {
   console.log("Received Filters:", rent, city, type, gender, roomType);
 
   if (rent) {
-    filter.rent = { $lte: Number(rent) }; // ✅ fix
+    filter.rent = { $lte: Number(rent) }; 
   }
 
   if (city) {
@@ -14,22 +17,24 @@ export const getAllProperties = async (req, res) => {
   }
 
   if (type) {
-    filter.type = type; // ✅ fix
+    filter.type = type; 
   }
 
   if (roomType) {
-    filter.roomType = roomType; // ✅ added
+    filter.roomType = roomType; 
   }
 
   if (gender) {
     filter.genderPreference = gender;
   }
 
-  console.log("FINAL FILTER:", filter);
+ 
 
   try {
     const properties = await Properties.find(filter);
+   
     res.status(200).json(properties);
+
   } catch (err) {
     res.status(500).json({ message: "Server error" });
   }
@@ -73,3 +78,29 @@ export const deleteProperty = async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 }
+export const MatchController=async(req,res)=>{
+  try{
+    
+    const  {id}  = req.params;
+    
+    const property = await Properties.findById(id);
+    if (!property) {
+      console.log("Property not found for ID:", id);
+      return res.status(404).json({ message: "Property not found" });
+    }
+    const residents = property.residents[0] || [];
+  
+    //user habit search
+    const userHabiit =await User.findOne({_id:"69d0f13c9c0c141907262861"}).select("preferences").lean();
+    const  residentsUser = await User.findOne({_id: residents});
+    
+    const residentPreferences = residentsUser.preferences || {};
+    res.status(200).json({residentPreferences,userHabiit});
+   
+  }
+  catch{
+      res.status(500).json({ message: "Server error" });
+  }
+   
+}
+

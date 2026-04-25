@@ -1,9 +1,10 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const PropertiesData = () => {
+  const navigate = useNavigate();
     const location = useLocation();
     const filters = location.state || {};
     const [properties, setProperties] = useState([]);
@@ -14,7 +15,7 @@ const PropertiesData = () => {
     .then((res) => res.json())
     .then((data) => {
      
-      setProperties(data); // ✅ array set
+      setProperties(data); 
     })
     .catch((err) => console.log(err));
 }, [filters]);
@@ -25,7 +26,7 @@ const PropertiesData = () => {
         
      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 bg-gray-100">
   {properties.map((p) => (
-    <div key={p._id} className="bg-white rounded-2xl shadow-md hover:shadow-lg transition">
+    <div key={p._id} className="bg-white rounded-2xl shadow-md hover:shadow-lg transition" onClick={()=>navigate(`/property/${p._id}`)}>
 
       {/* IMAGE */}
       <div className="relative">

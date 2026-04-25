@@ -15,7 +15,7 @@ const Landing = () => {
       
       <LandingFeatures />
       <LandingAbout/>
-      <Footer />
+     <Footer />
     </>
   );
 };

@@ -24,6 +24,13 @@ export default function Login() {
       
       if (res.ok) {
         localStorage.setItem("token", data.token);
+         if(data.role==="tenant"){
+         navigate("/home");
+       }
+       if(data.role==="owner"){
+        console.log("Owner logged in");
+          navigate("/home");
+       }
         Swal.fire({
       title: "Login Successful 🎉",
       text: "Welcome back to NestFinder!",
@@ -31,7 +38,7 @@ export default function Login() {
       timer: 1500,
       showConfirmButton: false
     });
-        navigate("/home");
+      
       } else {
         Swal.fire({
   title: "Error ❌",

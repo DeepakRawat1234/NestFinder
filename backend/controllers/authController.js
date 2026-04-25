@@ -46,7 +46,6 @@ export const Login = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const role = req.body.role;
-    console.log(req.body);
     try {
         const match = await User.findOne({ email });
         if (!match) {
@@ -69,7 +68,7 @@ export const Login = async (req, res) => {
 {expiresIn: "1d"}
             )
        
-            res.status(200).json({ message: "Login successful" , token});
+            res.status(200).json({ message: "Login successful" , token, role:match.role});
         }
     } catch (err) {
         console.error("Error during login:", err);
@@ -79,9 +78,7 @@ export const Login = async (req, res) => {
 export const SendOTP = async (req, res) => {
     const email = req.body.email;
     let otp = Math.floor(100000 + Math.random() * 900000);
-    console.log("Generated OTP for email", email, "is", otp);
     OtpStore[email] = otp;
-    console.log("Current OTP Store:", OtpStore);
     const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
