@@ -53,7 +53,7 @@ export const Login = async (req, res) => {
             console.log("User not found");
             return res.status(404).json({ message: "User not found" });
         }
-        console.log("User found:", match);
+        
         const isPasswordValid = await bcrypt.compare(password, match.passwordHash);
         if (!isPasswordValid) {
             console.log("Invalid password");
@@ -69,7 +69,7 @@ export const Login = async (req, res) => {
 {expiresIn: "1d"}
             )
        
-            res.status(200).json({ message: "Login successful" , token, role:match.role});
+            res.status(200).json({ message: "Login successful" , token,role:match.role, userdata:match});
         }
     } catch (err) {
         console.error("Error during login:", err);
@@ -109,4 +109,9 @@ export const VerifyOTP = async (req, res) => {
 
         res.status(400).json({ message: "Invalid OTP" });
     }
+}
+export const GetUserProfile = async (req, res) => {
+    res.json({
+    userData: req.user,
+  });
 }

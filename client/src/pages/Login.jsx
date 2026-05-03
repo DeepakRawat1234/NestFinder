@@ -25,11 +25,11 @@ export default function Login() {
       if (res.ok) {
         localStorage.setItem("token", data.token);
          if(data.role==="tenant"){
-         navigate("/home");
+         navigate("/home",);
        }
        if(data.role==="owner"){
         console.log("Owner logged in");
-          navigate("/home");
+          navigate("/OwnerDashboard",{state:data.userdata});
        }
         Swal.fire({
       title: "Login Successful 🎉",

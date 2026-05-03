@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { use, useState } from "react";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(); // auth state
   const [menuOpen, setMenuOpen] = useState(false); // mobile menu toggle
+  const navigate=useNavigate();
 
   return (
     <nav className="w-full bg-white shadow-md px-4 md:px-6 py-3">
@@ -40,7 +41,7 @@ const Navbar = () => {
                   Profile
                 </Link>
                 <button
-                  onClick={() => setIsLoggedIn(false)}
+                  onClick={() =>navigate("/")}
                   className="font-medium text-white bg-blue-500 px-5 py-2 rounded-lg"
                 >
                   Logout

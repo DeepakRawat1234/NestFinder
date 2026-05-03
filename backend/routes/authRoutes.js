@@ -8,4 +8,5 @@ const router=express.Router();
  router.post("/verify-otp",VerifyOTP);
  router.post("/send-otp",SendOTP);
  router.get("/profile", authMiddleware, GetUserProfile);
+ 
  export default router;

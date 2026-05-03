@@ -18,6 +18,11 @@ import Profile from './pages/tenant/Profile.jsx'
 import MyProperty from './pages/tenant/Booking.jsx'
 import MyBookings from './pages/tenant/Booking.jsx'
 import ComplaintsPage from './pages/tenant/Complaint.jsx'
+import Dashboard from './pages/owner/Dashboard.jsx'
+import AddListing from './pages/owner/AddListing.jsx'
+import Mylisting from './pages/owner/MyListings.jsx'
+import Complaints from './pages/owner/Complaints.jsx'
+import RentTracker from './pages/owner/RentTracker.jsx'
 
 
 function App() {
@@ -40,6 +45,11 @@ function App() {
     <Route path='/profile' element={<Profile/>}></Route>
     <Route path="/mybookings" element={<MyBookings/>}></Route>
     <Route path='/complaints' element={<ComplaintsPage/>}/>
+    <Route path='/OwnerDashboard' element={<Dashboard/>}/>
+    <Route path='/addlisting' element={<AddListing/>}/>
+    <Route path="/mylisting" element={<Mylisting/>}></Route>
+    <Route path='/get-complaints' element={<Complaints/>}/>
+    <Route path='/rent-tracker' element={<RentTracker/>}/>
     </Routes>
     
 

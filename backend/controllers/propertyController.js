@@ -104,3 +104,25 @@ export const MatchController=async(req,res)=>{
    
 }
 
+export const addProperty = async (req, res) => {
+  try {
+   
+    const images = req.files.map(file =>
+      file.buffer.toString("base64")
+    );
+
+    const property = new Properties({
+      ...req.body,
+      images,
+    });
+
+    await property.save();
+
+    res.status(201).json({
+      success: true
+    });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
