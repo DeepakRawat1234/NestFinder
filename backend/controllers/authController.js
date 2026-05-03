@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
-import { useState } from "react";
+
 import OtpStore from "../otpStore.js";
 import jwt from "jsonwebtoken";
 
