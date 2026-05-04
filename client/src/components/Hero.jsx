@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Icon from "./Icon";
-import { HERO_AVATARS } from "../data/constants";
+import { HERO_AVATARS } from "../data/Constants.js";
 import { useNavigate } from "react-router-dom";
 
 export default function HeroSection() {

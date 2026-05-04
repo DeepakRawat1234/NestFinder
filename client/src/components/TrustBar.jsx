@@ -1,5 +1,5 @@
 import Icon from "./Icon";
-import { TRUST_ITEMS } from "../data/constants";
+import { TRUST_ITEMS } from "../data/Constants.js";
 
 export default function TrustBar() {
   return (

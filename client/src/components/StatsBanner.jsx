@@ -1,4 +1,4 @@
-import { STATS } from "../data/constants";
+import { STATS } from "../data/Constants.js";
 
 export default function StatsBanner() {
   return (

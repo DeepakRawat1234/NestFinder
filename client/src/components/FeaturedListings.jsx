@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ListingCard from "./ListCard";
-import { LISTINGS, FILTER_TABS } from "../data/constants";
+import { LISTINGS, FILTER_TABS } from "../data/Constants.js";
 
 export default function FeaturedListings() {
   const [activeFilter, setActiveFilter] = useState("All Stays");

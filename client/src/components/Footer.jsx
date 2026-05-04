@@ -1,5 +1,5 @@
 import Icon from "./Icon";
-import { FOOTER_LINKS } from "../data/constants";
+import { FOOTER_LINKS } from "../data/Constants.js";
 
 const SOCIAL_ICONS = ["social_leaderboard", "alternate_email", "hub"];
 

@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 export default function RentTracker() {
   return (<>
   <Navbar/>
-    <div className="min-h-screen bg-gray-50 pt-20 px-6">
+    <div className="min-h-screen bg-gray-50 pt-20 px-6 mb-9">
 
       {/* Page Header */}
       <div className="flex flex-col md:flex-row justify-between items-end mb-10">

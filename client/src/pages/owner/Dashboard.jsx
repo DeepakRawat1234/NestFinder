@@ -14,7 +14,7 @@ export default function Dashboard() {
    const navigate=useNavigate();
     useEffect(()=>{
 const fetchProfile=async()=>{
-    const res = await fetch("http://localhost:5000/api/auth/profile",{
+    const res = await fetch("https://nestfinder-r6jz.onrender.com/api/auth/profile",{
     method:"GET",
     headers:{
         "Content-Type":"application/json",

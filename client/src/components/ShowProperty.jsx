@@ -12,56 +12,59 @@ export const ShowProperty = () => {
 const [safetyScore, setSafetyScore] = useState(0);
 const navigate = useNavigate();
 const calculateMatchScore = (owner, user) => {
+  if (!owner || !user) return 50;
+
   let score = 0;
-  let total = 6;
-console.log("owener preferences:", owner);
-console.log("user preferences:", user);
-  score += match(owner.smoking, user.smoking) * 15;
-  score += match(owner.drinking, user.drinking) * 15;
-  score += match(owner.food, user.food) * 15;
-  score += match(owner.sleep, user.sleep) * 15;
 
-  // slightly less important
-  score += match(owner.cleanliness, user.cleanliness) * 10;
-  score += match(owner.guestPolicy, user.guestPolicy) * 10;
-  score += match(owner.workingHours, user.workingHours) * 10;
+  score += match(owner.smoking, user.smoking) ? 15 : 0;
+  score += match(owner.drinking, user.drinking) ? 15 : 0;
+  score += match(owner.food, user.food) ? 15 : 0;
+  score += match(owner.sleep, user.sleep) ? 15 : 0;
 
-  
-  return Math.round((score / total) * 10);
+  score += match(owner.cleanliness, user.cleanliness) ? 10 : 0;
+  score += match(owner.guestPolicy, user.guestPolicy) ? 10 : 0;
+  score += match(owner.workingHours, user.workingHours) ? 10 : 0;
+
+  return Math.round((score / 90) * 100); // ✅ correct %
 };
 const match = (a, b) => {
-  if (a == b) return true;
-  if (a == "doesnt-mind" || b == "doesnt-mind") return true;
+  if (!a || !b) return false;
+  if (a === b) return true;
+  if (a === "doesnt-mind" || b === "doesnt-mind") return true;
   return false;
 };
-  useEffect(() => {
+ useEffect(() => {
   const fetchData = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/properties/${id}`);
+      const [res, matchRes] = await Promise.all([
+        fetch(`http://localhost:5000/api/properties/${id}`),
+        fetch(`http://localhost:5000/api/properties/match-score/${id}`)
+      ]);
 
-      if (!res.ok) {
-        throw new Error("Failed to fetch data");
-      }
-const matchRes = await fetch(`http://localhost:5000/api/properties/match-score/${id}`);
+      if (!res.ok) throw new Error("Failed to fetch data");
+
+      const json = await res.json();
+      setData(json);
 
       const matchData = await matchRes.json();
       console.log("Match data received:", matchData);
-      const score = calculateMatchScore(matchData.residentPreferences, matchData.userHabiit);
-      setMatchScore(score);
-      console.log("Match score calculated:", score);
-      
+
      
-      const json = await res.json();
-      setData(json);
-      
+      if (matchData?.residentPreferences && matchData?.userHabit) {
+        const score = calculateMatchScore(
+          matchData.residentPreferences,
+          matchData.userHabit
+        );
+        setMatchScore(score);
+        console.log("Match score calculated:", score);
+      } else {
+        setMatchScore(70);
+      }
 
-
-      
     } catch (err) {
       console.log("Error:", err);
     }
   };
- 
 
   fetchData();
 }, [id]);
@@ -71,16 +74,18 @@ useEffect(() => {
   }
 }, [data]);
   if (!data) return <p className="text-center mt-10">Loading...</p>;
-  const calculateSafetyScore = (safety) => {
-    if (!safety) return;
-    let score=0;
-    let total=3;
-    if(safety?.cctv) score++;
-    if(safety?.guard) score++;
-    if(safety?.biometric) score++;
-    setSafetyScore(((score/total)*5).toFixed(0));
-   
-  }
+ const calculateSafetyScore = (safety) => {
+  if (!safety) return;
+
+  let score = 0;
+  let total = 3;
+
+  if (safety?.cctv) score++;
+  if (safety?.guard) score++;
+  if (safety?.biometric) score++;
+
+  setSafetyScore(Math.round((score / total) * 5)); // ✅ number fix
+};
   const handlePayment=()=>{
     navigate("/payment", {state:data});
   }

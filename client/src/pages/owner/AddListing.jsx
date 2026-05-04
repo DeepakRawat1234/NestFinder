@@ -38,7 +38,7 @@ const handleSubmit = async (e) => {
     
     
 
-    const res = await fetch("http://localhost:5000/api/properties/add-property", {
+    const res = await fetch("https://nestfinder-r6jz.onrender.com/api/properties/add-property", {
       method: "POST",
       body: formData,
     });
