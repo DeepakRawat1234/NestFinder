@@ -1,5 +1,5 @@
 import Icon from "./Icon";
-import { HOW_STEPS } from "../data/constants";
+import { HOW_STEPS } from "../data/Constants.js";
 
 export default function HowItWorks() {
   return (

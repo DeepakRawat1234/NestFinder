@@ -1,6 +1,6 @@
 import { use } from "react";
 import { useNavigate } from "react-router-dom";
-import { HERO_AVATARS } from "../data/constants";
+import { HERO_AVATARS } from "../data/Constants.js";
 const LandingHero = () => {
     const navigate=useNavigate();
     const handleExploreClick = () => {
